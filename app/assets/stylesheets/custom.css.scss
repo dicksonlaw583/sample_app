@@ -1,5 +1,7 @@
 @import "bootstrap";
 
+$lightGray: #999;
+
 /* Universal --> */
 
 html {
@@ -20,10 +22,9 @@ textarea {
 
 .center {
 	text-align: center;
-}
-
-.center h1 {
-	margin-bottom: 20px;
+	h1 {
+		margin-bottom: 20px;
+	}
 }
 
 /* <-- Universal */
@@ -46,7 +47,7 @@ h2 {
 	margin-bottom: 30px;
 	text-align: center;
 	font-weight: normal;
-	color: #999;
+	color: $lightGray;
 }
 
 p {
@@ -67,13 +68,12 @@ p {
 	padding-top: 9px;
 	font-weight: bold;
 	line-height: 1;
-}
-
-#logo:hover {
-	position: relative;
-	left: 1em;
-	color: #fff;
-	text-decoration: none;
+	&:hover {
+		position: relative;
+		left: 1em;
+		color: #fff;
+		text-decoration: none;
+	}
 }
 
 /* <-- Header */
@@ -83,29 +83,24 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eee;
-  color: #999;
-}
-
-footer a {
-  color: #555;
-}  
-
-footer a:hover { 
-  color: #222;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 10px;
+  color: $lightGray;
+  a {
+    color: #555;
+    &:hover { 
+      color: #222;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
 }
 
 /* <-- Footer */
