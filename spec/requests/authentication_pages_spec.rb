@@ -80,6 +80,11 @@ describe "Authentication" do
 				end
 			end
 
+			describe "links that should not show up" do
+				it { should_not have_link('Profile') }
+				it { should_not have_link('Settings') }
+			end
+
 		end
 
 		describe "for wrong user" do
