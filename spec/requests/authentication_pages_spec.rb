@@ -52,7 +52,6 @@ describe "Authentication" do
 			let(:user) { FactoryGirl.create(:user) }
 
 			describe "in Users controller" do
-
 				describe "visiting edit page" do
 					before { visit edit_user_path(user) }
 					it { should have_selector('title', text: 'Sign in') }
@@ -61,6 +60,16 @@ describe "Authentication" do
 				describe "submitting to update action" do
 					before { put user_path(user) }
 					specify { response.should redirect_to(signin_path) }
+				end
+			end
+
+			describe "friendly forwarding" do
+				before do
+					visit edit_user_path(user)
+					sign_in user
+				end
+				describe "after signing in" do
+					it { should have_selector('title', text: 'Edit user') }
 				end
 			end
 		end
