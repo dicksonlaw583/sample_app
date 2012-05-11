@@ -33,7 +33,9 @@ describe "Authentication" do
 				sign_in user
 			end
 			it { should have_selector('title', text: user.name) }
+			it { should have_link('Users', href: users_path) }
 			it { should have_link('Profile', href: user_path(user)) }
+			it { should have_link('Settings', href: edit_user_path(user))}
 			it { should have_link('Sign out', href: signout_path) }
 			it { should_not have_link('Sign in', href: signin_path) }
 			describe "after saving the user" do
@@ -61,6 +63,11 @@ describe "Authentication" do
 					before { put user_path(user) }
 					specify { response.should redirect_to(signin_path) }
 				end
+
+				describe "user index" do
+					before { visit users_path }
+					it { should have_selector('title', text: 'Sign in') }
+				end
 			end
 
 			describe "friendly forwarding" do
@@ -72,6 +79,7 @@ describe "Authentication" do
 					it { should have_selector('title', text: 'Edit user') }
 				end
 			end
+
 		end
 
 		describe "for wrong user" do
