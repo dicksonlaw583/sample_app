@@ -6,15 +6,19 @@ describe "UserPages" do
 
   describe "signup page" do
     before { visit signup_path }
-    it { should have_selector('h1', :text => 'Sign up') }
-    it { should have_selector('title', :text => full_title('Sign up'))}
+    let(:heading) { 'Sign up' }
+    let(:page_title) { 'Sign up' }
+
+    it_should_behave_like "all static pages"
   end
 
   describe "profile page" do
   	let(:user) { FactoryGirl.create(:user) }
   	before { visit user_path(user) }
-  	it { should have_selector('h1', text: user.name) }
-  	it { should have_selector('title', text: user.name) }
+  	let(:heading) { user.name }
+    let(:page_title) { user.name }
+
+    it_should_behave_like "all static pages"
   end
 
   describe "sign up" do
