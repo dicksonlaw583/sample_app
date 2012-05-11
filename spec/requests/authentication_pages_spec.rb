@@ -84,7 +84,6 @@ describe "Authentication" do
 				it { should_not have_link('Profile') }
 				it { should_not have_link('Settings') }
 			end
-
 		end
 
 		describe "for wrong user" do
@@ -111,6 +110,21 @@ describe "Authentication" do
 			describe "submitting DELETE request to Users#destroy action" do
 				before { delete user_path(admin) }
 
+				specify { response.should redirect_to(root_path) }
+			end
+		end
+
+		describe "as signed-in user" do
+			let(:user) { FactoryGirl.create(:user) }
+			before { sign_in user }
+
+			describe "submitting request to Users#new action" do
+				before { get new_user_path }
+				specify { response.should redirect_to(root_path) }
+			end
+
+			describe "submitting request to Users#create action" do
+				before { post users_path }
 				specify { response.should redirect_to(root_path) }
 			end
 		end
