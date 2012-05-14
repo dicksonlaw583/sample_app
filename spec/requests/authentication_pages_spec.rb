@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'helpers/application_helper_spec'
 
 describe "Authentication" do
   
@@ -87,6 +88,20 @@ describe "Authentication" do
 			describe "links that should not show up" do
 				it { should_not have_link('Profile') }
 				it { should_not have_link('Settings') }
+			end
+
+			describe "in the Microposts controller" do
+				describe "submitting to create" do
+					before { post microposts_path }
+					specify { response.should redirect_to(signin_path) }
+				end
+				describe "submitting to destroy" do
+					before do
+						micropost = FactoryGirl.create(:micropost)
+						delete micropost_path(micropost)
+					end
+					specify { response.should redirect_to(signin_path) }
+				end
 			end
 		end
 
