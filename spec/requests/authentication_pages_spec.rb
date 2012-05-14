@@ -78,6 +78,10 @@ describe "Authentication" do
 				describe "after signing in" do
 					it { should have_selector('title', text: 'Edit user') }
 				end
+				describe "when signing in again" do
+					before { sign_in user }
+					it { should have_selector('title', text: user.name) }
+				end
 			end
 
 			describe "links that should not show up" do
@@ -127,6 +131,18 @@ describe "Authentication" do
 				before { post users_path }
 				specify { response.should redirect_to(root_path) }
 			end
+		end
+
+		describe "as admin user" do
+			let(:admin) { FactoryGirl.create(:admin) }
+			let(:adminB) { FactoryGirl.create(:admin) }
+			before { sign_in admin }
+
+			describe "admins cannot delete themselves" do
+				before { delete user_path(admin) }
+				specify { response.should redirect_to(root_path) }
+			end
+
 		end
 
 	end
