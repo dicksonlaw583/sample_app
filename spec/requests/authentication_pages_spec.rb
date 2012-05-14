@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'helpers/application_helper_spec'
 
 describe "Authentication" do
   
