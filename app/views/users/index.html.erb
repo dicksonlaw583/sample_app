@@ -3,10 +3,6 @@
 
 <%= will_paginate %>
 
-<ul class="users">
-	<% @users.each do |user| %>
-		<%= render user %>
-	<% end %>
-</ul>
+<%= render 'shared/user_list' %>
 
 <%= will_paginate %>

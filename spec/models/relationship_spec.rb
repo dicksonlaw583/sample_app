@@ -38,4 +38,18 @@ describe Relationship do
 		end
 	end
 
+	describe "dependence on users" do
+		before { relationship.save }
+
+		it "should disappear if following side is destroyed" do
+			follower.destroy
+			Relationship.find_by_id(relationship.id).should be_nil
+		end
+
+		it "should disappear if followed side is destroyed" do
+			followed.destroy
+			Relationship.find_by_id(relationship.id).should be_nil
+		end
+	end
+
 end

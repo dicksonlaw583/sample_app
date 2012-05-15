@@ -2,10 +2,7 @@
 <div class="row">
 	<aside class="span4">
 		<section>
-			<%= gravatar_for @user %>
-			<h1><%= @user.name %></h1>
-			<span><%= link_to "view my profile", @user %></span>
-			<span><b>Microposts:</b> <%= @user.microposts.count %></span>
+			<%= render 'shared/user_info' %>
 		</section>
 		<section>
 			<%= render 'shared/stats' %>
@@ -21,9 +18,7 @@
 	<div class="span8">
 		<h3><%= @title %></h3>
 		<% if @users.any? %>
-			<ul class="users">
-				<%= render @users %>
-			</ul>
+			<%= render 'shared/user_list' %>
 			<%= will_paginate @users %>
 		<% end %>
 	</div>
