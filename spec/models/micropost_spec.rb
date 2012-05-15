@@ -36,4 +36,22 @@ describe Micropost do
   	end
   end
 
+  describe "from_users_followed_by" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:userA) { FactoryGirl.create(:user) }
+    let(:userB) { FactoryGirl.create(:user) }
+
+    before { user.follow!(userA) }
+
+    let(:my_post) { user.microposts.create!(content: "foo") }
+    let(:followed_post) { userA.microposts.create!(content: "bar") }
+    let(:unfollowed_post) { userB.microposts.create!(content: "Waahoo") }
+
+    subject { Micropost.from_users_followed_by(user) }
+
+    it { should include(my_post) }
+    it { should include(followed_post) }
+    it { should_not include(unfollowed_post) }
+  end
+
 end
