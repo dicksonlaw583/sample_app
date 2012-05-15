@@ -45,4 +45,30 @@ describe "Micropost pages" do
 		end
 	end
 
+	describe "micropost plurals" do
+    describe "0 posts" do
+      before { visit root_path }
+      it { should have_selector('span', text: '0 microposts') }
+    end
+    describe "1 post" do
+      before {
+        FactoryGirl.create(:micropost, user: user)
+        visit root_path
+      }
+      it { should have_selector('span', text: '1 micropost') }
+    end
+    describe "2 posts" do
+      before {
+        FactoryGirl.create(:micropost, user: user)
+        FactoryGirl.create(:micropost, user: user)
+        visit root_path
+      }
+      it { should have_selector('span', text: '2 microposts') }
+    end
+  end
+
+  describe "micropost pagination" do
+  	let(:user) { FactoryGirl.create(:user)}
+  end
+
 end
